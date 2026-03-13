@@ -16,7 +16,7 @@ Purpose
 The goal of this project is to demonstrate practical cybersecurity knowledge through an interactive interface.
 Instead of a traditional portfolio website, this lab studio presents work through a terminal-style experience similar to real security environments.
 
-Example Commands
+## Example Commands
 
 Visitors can type commands such as:
 
