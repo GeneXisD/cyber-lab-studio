@@ -69,6 +69,96 @@ Evidence files located`,
 
 Mobile Linux experimentation
 64-bit architecture research
+Security testing sandbox`
+};
+
+function print(text = "") {
+  output.textContent += text + "\n";
+  output.scrollTop = output.scrollHeight;
+}
+
+function runCommand(cmd) {
+  print(`victor@lab-studio:~$ ${cmd}`);
+
+  if (cmd === "clear") {
+    output.textContent = "";
+    return;
+  }
+
+  if (commands[cmd]) {
+    print(commands[cmd]);
+  } else if (cmd !== "") {
+    print("command not found");
+  }
+
+  print("");
+}
+
+function submitCurrentCommand() {
+  const cmd = input.value.trim();
+  runCommand(cmd);
+  input.value = "";
+}
+
+terminal.addEventListener("click", () => {
+  input.focus();
+});
+
+window.addEventListener("load", () => {
+  print("Victor Cyber Lab Studio");
+  print("Type 'help' to begin");
+  print("");
+  input.focus();
+});
+
+input.addEventListener("keydown", (e) => {
+  if (e.key === "Enter") {
+    e.preventDefault();
+    e.stopPropagation();
+    submitCurrentCommand();
+  }
+});
+
+input.addEventListener("keypress", (e) => {
+  if (e.key === "Enter") {
+    e.preventDefault();
+    e.stopPropagation();
+  }
+});
+  tools: `Security tools:
+
+network-scanner
+log-analyzer
+xss-detector`,
+
+  research: `Research topics:
+
+ish64-security-environment
+web-security-analysis`,
+
+  "demo nmap": `Starting Nmap scan...
+
+PORT     STATE SERVICE
+22/tcp   open  ssh
+80/tcp   open  http
+443/tcp  open  https`,
+
+  "demo metasploit": `msf6 > use exploit/unix/ftp/vsftpd_234_backdoor
+msf6 > set RHOSTS 192.168.1.15
+msf6 > run
+
+Session opened`,
+
+  "demo autopsy": `Digital Forensics Analysis
+
+User artifacts discovered
+Deleted files timeline recovered
+Evidence files located`,
+
+  "demo ish64": `iSH64 Research Environment
+
+Mobile Linux experimentation
+64-bit architecture research
 security testing sandbox`
 };
 
