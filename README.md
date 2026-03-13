@@ -21,12 +21,19 @@ Instead of a traditional portfolio website, this lab studio presents work throug
 Visitors can type commands such as:
 
 help
+
 labs
+
 tools
+
 research
+
 demo nmap
+
 demo metasploit
+
 demo autopsy
+
 demo ish64
 
 These commands display guided demonstrations of cybersecurity topics including:
