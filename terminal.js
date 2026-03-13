@@ -1,10 +1,9 @@
-const output = document.getElementById("output")
-const input = document.getElementById("input")
+const output = document.getElementById("output");
+const input = document.getElementById("input");
+const terminal = document.getElementById("terminal");
 
 const commands = {
-
-help: `
-Available commands:
+  help: `Available commands:
 
 about
 creator
@@ -15,54 +14,104 @@ demo nmap
 demo metasploit
 demo autopsy
 demo ish64
-clear
-`,
+clear`,
 
-about: `
-Victor Cyber Lab Studio
+  about: `Victor Cyber Lab Studio
 
 Interactive cybersecurity portfolio
 built for demonstrating labs, tools,
-and research projects.
-`,
+and research projects.`,
 
-creator: `
-Creator:
+  creator: `Creator:
 Victor Jose Corral
 
 Cybersecurity student
-Developer of iSH64 research environment
-`,
+Developer of iSH64 research environment`,
 
-labs: `
-Labs available:
+  labs: `Labs available:
 
 network-scanning
 metasploit-labs
 digital-forensics
-web-recon
-`,
+web-recon`,
 
-tools: `
-Security tools:
+  tools: `Security tools:
 
 network-scanner
 log-analyzer
-xss-detector
-`,
+xss-detector`,
 
-research: `
-Research topics:
+  research: `Research topics:
 
 ish64-security-environment
-web-security-analysis
-`,
+web-security-analysis`,
 
-"demo nmap": `
-Starting Nmap scan...
+  "demo nmap": `Starting Nmap scan...
 
 PORT     STATE SERVICE
 22/tcp   open  ssh
+80/tcp   open  http
+443/tcp  open  https`,
+
+  "demo metasploit": `msf6 > use exploit/unix/ftp/vsftpd_234_backdoor
+msf6 > set RHOSTS 192.168.1.15
+msf6 > run
+
+Session opened`,
+
+  "demo autopsy": `Digital Forensics Analysis
+
+User artifacts discovered
+Deleted files timeline recovered
+Evidence files located`,
+
+  "demo ish64": `iSH64 Research Environment
+
+Mobile Linux experimentation
+64-bit architecture research
+security testing sandbox`
+};
+
+function print(text = "") {
+  output.innerText += text + "\n";
+  output.scrollTop = output.scrollHeight;
+}
+
+function runCommand(cmd) {
+  print(`victor@lab-studio:~$ ${cmd}`);
+
+  if (cmd === "clear") {
+    output.innerText = "";
+    return;
+  }
+
+  if (commands[cmd]) {
+    print(commands[cmd]);
+  } else if (cmd.trim() !== "") {
+    print("command not found");
+  }
+
+  print("");
+}
+
+terminal.addEventListener("click", () => {
+  input.focus();
+});
+
+window.addEventListener("load", () => {
+  input.focus();
+  print("Victor Cyber Lab Studio");
+  print("Type 'help' to begin");
+  print("");
+});
+
+input.addEventListener("keydown", (e) => {
+  if (e.key === "Enter") {
+    const cmd = input.value.trim();
+    runCommand(cmd);
+    input.value = "";
+  }
+});22/tcp   open  ssh
 80/tcp   open  http
 443/tcp  open  https
 `,
