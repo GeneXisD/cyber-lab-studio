@@ -1,7 +1,5 @@
 const output = document.getElementById("output");
 const input = document.getElementById("input");
-const terminal = document.getElementById("terminal");
-const form = document.getElementById("command-form");
 
 const commands = {
   help: `Available commands:
@@ -20,14 +18,11 @@ clear`,
   about: `Victor Cyber Lab Studio
 
 Interactive cybersecurity portfolio
-built for demonstrating labs, tools,
-and research projects.`,
+for demonstrating labs and tools.`,
 
   creator: `Creator:
 Victor Jose Corral
-
-Cybersecurity student
-Creator of the iSH64 research environment.`,
+Cybersecurity student and developer.`,
 
   labs: `Labs available:
 
@@ -35,6 +30,82 @@ network-scanning
 metasploit-labs
 digital-forensics
 web-recon`,
+
+  tools: `Security tools:
+
+network-scanner
+log-analyzer
+xss-detector`,
+
+  research: `Research topics:
+
+ish64-security-environment
+web-security-analysis`,
+
+  "demo nmap": `Starting Nmap scan...
+
+PORT     STATE SERVICE
+22/tcp   open  ssh
+80/tcp   open  http
+443/tcp  open  https`,
+
+  "demo metasploit": `msf6 > use exploit/unix/ftp/vsftpd_234_backdoor
+msf6 > set RHOSTS 192.168.1.15
+msf6 > run
+
+Session opened`,
+
+  "demo autopsy": `Digital Forensics Analysis
+
+User artifacts discovered
+Deleted files timeline recovered
+Evidence files located`,
+
+  "demo ish64": `iSH64 Research Environment
+
+Mobile Linux experimentation
+64-bit architecture research`
+};
+
+function print(text = "") {
+  output.textContent += text + "\n";
+  output.scrollTop = output.scrollHeight;
+}
+
+function runCommand(cmd) {
+  const clean = cmd.trim();
+
+  print(`victor@lab-studio:~$ ${clean}`);
+
+  if (clean === "clear") {
+    output.textContent = "";
+    return;
+  }
+
+  if (commands[clean]) {
+    print(commands[clean]);
+  } else {
+    print("command not found");
+  }
+
+  print("");
+}
+
+window.onload = () => {
+  print("Victor Cyber Lab Studio");
+  print("Type 'help' to begin");
+  print("");
+  input.focus();
+};
+
+input.addEventListener("keydown", (e) => {
+  if (e.key === "Enter") {
+    e.preventDefault();
+    const cmd = input.value;
+    runCommand(cmd);
+    input.value = "";
+  }
+});web-recon`,
 
   tools: `Security tools:
 
